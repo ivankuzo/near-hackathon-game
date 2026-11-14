@@ -45,7 +45,8 @@ func begin(stones: StoneTileMap, drops: OreDrops, collector: OreCollector,
 	_step = Step.ROCK
 	_prompt.text = "BREAK THE ROCK"
 	_prompt.show()
-	_controls.show()
+	if not MobileControls.is_mobile():
+		_controls.show()
 	_controls_left = 4.0
 	set_physics_process(true)
 

@@ -70,6 +70,8 @@ var _loading: bool = false
 
 
 func _ready() -> void:
+	if MobileControls.is_mobile():
+		add_child(preload("res://ui/mobile/orientation_prompt.gd").new())
 	for kind in OrePayout.KINDS:
 		if not ore_prices.has(kind) or ore_prices[kind] <= 0:
 			push_error("Workshop requires a positive price for ore '%s'." % kind)

@@ -24,6 +24,8 @@ var current_health: int
 var move_speed: float
 var _flash_tween: Tween
 var _damage_flash_tween: Tween
+var mobile_controls: MobileControls
+var _mobile_aim: Vector2 = Vector2.RIGHT
 
 @onready var _robot: RobotVisual = $RobotVisual
 @onready var _projectile_hurtbox: ModularHurtbox = $ProjectileHurtbox
@@ -117,10 +119,17 @@ func scatter_on_defeat(debris_parent: Node2D) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	velocity = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down") * move_speed
+	var movement: Vector2 = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
+	if is_instance_valid(mobile_controls):
+		movement = mobile_controls.move_vector
+	velocity = movement * move_speed
 	move_and_slide()
 
 	var aim_position: Vector2 = get_global_mouse_position()
+	if is_instance_valid(mobile_controls):
+		if not mobile_controls.aim_vector.is_zero_approx():
+			_mobile_aim = mobile_controls.aim_vector.normalized()
+		aim_position = global_position + _mobile_aim * 1000.0
 	var is_walking: bool = not get_real_velocity().is_zero_approx()
 	_robot.set_walking(is_walking)
 	_robot.advance_walk(delta)
@@ -131,7 +140,10 @@ func _physics_process(delta: float) -> void:
 		_headlamp.look_at(aim_position)
 	_headlamp.place_at(_robot.headlamp_position(), global_position)
 	_fill_light.place_at(to_global(_fill_source_offset), global_position)
-	if Input.is_action_pressed(&"shoot") and _fire_timer.is_stopped():
+	var firing: bool = Input.is_action_pressed(&"shoot")
+	if is_instance_valid(mobile_controls):
+		firing = mobile_controls.firing
+	if firing and _fire_timer.is_stopped():
 		_fire(aim_position)
 
 

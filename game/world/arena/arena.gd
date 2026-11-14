@@ -49,6 +49,15 @@ var onboarding_enabled: bool = false
 
 
 func _ready() -> void:
+	if MobileControls.is_mobile():
+		var controls_layer := CanvasLayer.new()
+		add_child(controls_layer)
+		var controls := MobileControls.new()
+		controls_layer.add_child(controls)
+		player.mobile_controls = controls
+		$Crosshair.hide()
+		$Crosshair.set_process(false)
+		$Crosshair.set_process_input(false)
 	player.health_changed.connect(_health_bar.set_health)
 	player.health_changed.connect(_on_player_health_changed)
 	player.damage_received.connect(_player_damage_shake.trigger)
@@ -124,6 +133,8 @@ func _finish_run(won: bool) -> void:
 	if _finished:
 		return
 	_finished = true
+	if is_instance_valid(player.mobile_controls):
+		player.mobile_controls.queue_free()
 	_onboarding.stop()
 	if won:
 		var ore: Dictionary = ore_collector.amounts.duplicate()
