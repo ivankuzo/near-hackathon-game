@@ -1,0 +1,46 @@
+name: Deploy game to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot and export templates
+        run: |
+          base=https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable
+          curl -fsSL "$base/Godot_v4.7.2-stable_linux.x86_64.zip" -o godot.zip
+          unzip -q godot.zip -d /tmp/godot
+          curl -fsSL "$base/Godot_v4.7.2-stable_export_templates.tpz" -o templates.zip
+          mkdir -p "$HOME/.local/share/godot/export_templates/4.7.2.stable"
+          unzip -q templates.zip -d /tmp/godot-templates
+          cp -r /tmp/godot-templates/templates/. "$HOME/.local/share/godot/export_templates/4.7.2.stable/"
+      - name: Import and export game
+        run: |
+          GODOT=/tmp/godot/Godot_v4.7.2-stable_linux.x86_64
+          mkdir -p "$RUNNER_TEMP/web"
+          "$GODOT" --headless --path game --editor --import
+          "$GODOT" --headless --path game --export-release Web "$RUNNER_TEMP/web/index.html"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/web
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

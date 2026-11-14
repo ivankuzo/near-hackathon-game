@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/arena/enemy_spawner.gd" id="1_spawner"]
+[ext_resource type="Script" path="res://world/arena/enemy_spawn_entry.gd" id="2_entry"]
+[ext_resource type="PackedScene" path="res://enemies/robots/scout.tscn" id="3_scout"]
+[ext_resource type="PackedScene" path="res://enemies/robots/sentry.tscn" id="4_sentry"]
+[ext_resource type="PackedScene" path="res://enemies/robots/walker.tscn" id="5_walker"]
+
+[sub_resource type="Resource" id="Scout"]
+resource_name = "Scout"
+script = ExtResource("2_entry")
+enemy_scene = ExtResource("3_scout")
+weight = 60.0
+
+[sub_resource type="Resource" id="Sentry"]
+resource_name = "Sentry"
+script = ExtResource("2_entry")
+enemy_scene = ExtResource("4_sentry")
+weight = 25.0
+
+[sub_resource type="Resource" id="Walker"]
+resource_name = "Walker"
+script = ExtResource("2_entry")
+enemy_scene = ExtResource("5_walker")
+weight = 15.0
+
+[node name="EnemySpawner" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_spawner")
+entries = Array[ExtResource("2_entry")]([SubResource("Scout"), SubResource("Sentry"), SubResource("Walker")])
+encounter_chance = 0.72
+dormant_chance = 0.6
+sector_size = Vector2i(4, 4)
+safe_radius = 420.0
+stream_margin = 170.0

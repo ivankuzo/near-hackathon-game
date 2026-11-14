@@ -1,0 +1,86 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://world/ore/ore_shard.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://effects/contact_shadow/contact_shadow.tscn" id="2_shadow"]
+[ext_resource type="Texture2D" path="res://world/ore/art/iron_canvas.tres" id="3_texture"]
+[ext_resource type="Texture2D" path="res://world/ore/art/iron_emission.png" id="4_emission"]
+
+[ext_resource type="Shader" path="res://world/ore/ore_shadow_projection.gdshader" id="5_shadow_projection"]
+
+[sub_resource type="ShaderMaterial" id="SurfaceProjection"]
+shader = ExtResource("5_shadow_projection")
+
+[sub_resource type="CanvasItemMaterial" id="Additive"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="LightGradient"]
+offsets = PackedFloat32Array(0, 0.28, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.72, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="LightTexture"]
+gradient = SubResource("LightGradient")
+width = 96
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CircleShape2D" id="PickupShape"]
+radius = 8.0
+
+[node name="OreShard" type="Node2D" node_paths=PackedStringArray("light")]
+texture_filter = 1
+script = ExtResource("1_script")
+light = NodePath("GlowLight")
+
+[node name="Shadow" parent="." instance=ExtResource("2_shadow")]
+position = Vector2(0, -1)
+scale = Vector2(0.95, 0.48)
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Visual"]
+material = SubResource("SurfaceProjection")
+position = Vector2(0, -16)
+texture = ExtResource("3_texture")
+
+[node name="Emission" type="Sprite2D" parent="Visual"]
+position = Vector2(0, -16)
+material = SubResource("Additive")
+texture = ExtResource("4_emission")
+
+[node name="Halo" type="Sprite2D" parent="Visual"]
+texture_filter = 2
+position = Vector2(0, -16)
+self_modulate = Color(1, 1, 1, 0.09)
+scale = Vector2(0.55, 0.43)
+material = SubResource("Additive")
+texture = SubResource("LightTexture")
+
+[node name="GlowLight" type="PointLight2D" parent="."]
+texture_filter = 2
+enabled = false
+energy = 0.62
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = SubResource("LightTexture")
+height = 28.0
+
+[node name="Visibility" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-64, -112, 128, 144)
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+
+[node name="Shape" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("PickupShape")
+
+[node name="PickupTrail" type="Line2D" parent="."]
+visible = false
+top_level = true
+material = SubResource("Additive")
+width = 1.8

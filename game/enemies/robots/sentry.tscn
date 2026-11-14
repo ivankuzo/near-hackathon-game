@@ -1,0 +1,590 @@
+[gd_scene format=3 uid="uid://bafuldd4thit1"]
+
+[ext_resource type="PackedScene" path="res://enemies/robots/robot_chaser.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://dljqvwx42ej82" path="res://enemies/robots/sentry_body.png" id="2_sheet"]
+[ext_resource type="Texture2D" uid="uid://pdns77nhcb7m" path="res://enemies/robots/sentry_normal.png" id="3_normals"]
+[ext_resource type="Resource" path="res://enemies/robots/sentry_hurtbox.tres" id="4_hurtbox"]
+[ext_resource type="Shader" uid="uid://34yoq3erv7fi" path="res://enemies/robots/robot_lighting.gdshader" id="5_lighting"]
+[ext_resource type="Script" uid="uid://cjcaffguuh46t" path="res://enemies/robots/sentry.gd" id="6_sentry"]
+[ext_resource type="Script" uid="uid://dn7vmds7fb7f2" path="res://enemies/robots/sentry_weapon.gd" id="7_weapon"]
+[ext_resource type="PackedScene" path="res://enemies/robots/sentry_bolt.tscn" id="8_bolt"]
+[ext_resource type="Texture2D" uid="uid://bhqjw2dhv3bq7" path="res://enemies/robots/sentry_barrel.png" id="9_barrel"]
+[ext_resource type="Texture2D" uid="uid://ih2cj6jm70ag" path="res://enemies/robots/sentry_barrel_normal.png" id="10_barrel_normal"]
+[ext_resource type="AudioStream" path="res://enemies/robots/sentry_shot.ogg" id="11_shot_sound"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_robot"]
+shader = ExtResource("5_lighting")
+shader_parameter/robot_diffuse = ExtResource("2_sheet")
+shader_parameter/robot_normal = ExtResource("3_normals")
+shader_parameter/eye_power = 1.0
+shader_parameter/damage_origin = Vector2(0, 0)
+shader_parameter/damage_radius = 12.0
+shader_parameter/damage_pulse = 0.0
+shader_parameter/hit_origin = Vector2(0, 0)
+shader_parameter/hit_displacement = Vector2(0, 0)
+shader_parameter/hit_radius = 20.0
+shader_parameter/hit_body_bottom = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_robot"]
+diffuse_texture = ExtResource("2_sheet")
+normal_texture = ExtResource("3_normals")
+
+[sub_resource type="AtlasTexture" id="Frame_6_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 480, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_6_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(88, 480, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_6_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(176, 480, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_6_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(264, 480, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_6_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(352, 480, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_8_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 640, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_8_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(88, 640, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_8_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(176, 640, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_8_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(264, 640, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_8_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(352, 640, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_7_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 560, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_7_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(88, 560, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_7_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(176, 560, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_7_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(264, 560, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_7_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(352, 560, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 320, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(88, 320, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(176, 320, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(264, 320, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(352, 320, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_5"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(440, 320, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_6"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(528, 320, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_7"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(616, 320, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(88, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(176, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(264, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(352, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_5"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(440, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_6"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(528, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_7"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(616, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_8"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(704, 0, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(88, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(176, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(264, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(352, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_5"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(440, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_6"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(528, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_7"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(616, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_8"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(704, 240, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(88, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(176, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(264, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(352, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_5"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(440, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_6"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(528, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_7"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(616, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_8"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(704, 160, 88, 80)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_robot"]
+animations = [{
+"frames": [{
+"duration": 9.5,
+"texture": SubResource("Frame_6_0")
+}, {
+"duration": 11.0,
+"texture": SubResource("Frame_6_1")
+}, {
+"duration": 4.4,
+"texture": SubResource("Frame_6_2")
+}, {
+"duration": 7.8,
+"texture": SubResource("Frame_6_3")
+}, {
+"duration": 12.0,
+"texture": SubResource("Frame_6_4")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 9.5,
+"texture": SubResource("Frame_8_0")
+}, {
+"duration": 11.0,
+"texture": SubResource("Frame_8_1")
+}, {
+"duration": 4.4,
+"texture": SubResource("Frame_8_2")
+}, {
+"duration": 7.8,
+"texture": SubResource("Frame_8_3")
+}, {
+"duration": 12.0,
+"texture": SubResource("Frame_8_4")
+}],
+"loop": 0,
+"name": &"attack_critical",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 9.5,
+"texture": SubResource("Frame_7_0")
+}, {
+"duration": 11.0,
+"texture": SubResource("Frame_7_1")
+}, {
+"duration": 4.4,
+"texture": SubResource("Frame_7_2")
+}, {
+"duration": 7.8,
+"texture": SubResource("Frame_7_3")
+}, {
+"duration": 12.0,
+"texture": SubResource("Frame_7_4")
+}],
+"loop": 0,
+"name": &"attack_damaged",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 8.5,
+"texture": SubResource("Frame_4_0")
+}, {
+"duration": 6.5,
+"texture": SubResource("Frame_4_1")
+}, {
+"duration": 7.8,
+"texture": SubResource("Frame_4_2")
+}, {
+"duration": 7.7,
+"texture": SubResource("Frame_4_3")
+}, {
+"duration": 4.8,
+"texture": SubResource("Frame_4_4")
+}, {
+"duration": 8.0,
+"texture": SubResource("Frame_4_5")
+}, {
+"duration": 10.5,
+"texture": SubResource("Frame_4_6")
+}, {
+"duration": 20.0,
+"texture": SubResource("Frame_4_7")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("Frame_0_0")
+}],
+"loop": 0,
+"name": &"idle",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("Frame_3_0")
+}],
+"loop": 0,
+"name": &"idle_critical",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("Frame_2_0")
+}],
+"loop": 0,
+"name": &"idle_damaged",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 7.2,
+"texture": SubResource("Frame_0_1")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_0_2")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_0_3")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_0_4")
+}, {
+"duration": 7.2,
+"texture": SubResource("Frame_0_5")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_0_6")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_0_7")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_0_8")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 7.2,
+"texture": SubResource("Frame_3_1")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_3_2")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_3_3")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_3_4")
+}, {
+"duration": 7.2,
+"texture": SubResource("Frame_3_5")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_3_6")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_3_7")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_3_8")
+}],
+"loop": 1,
+"name": &"run_critical",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 7.2,
+"texture": SubResource("Frame_2_1")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_2_2")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_2_3")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_2_4")
+}, {
+"duration": 7.2,
+"texture": SubResource("Frame_2_5")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_2_6")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_2_7")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_2_8")
+}],
+"loop": 1,
+"name": &"run_damaged",
+"speed": 100.0
+}]
+
+[sub_resource type="ShaderMaterial" id="BarrelMaterial"]
+shader = ExtResource("5_lighting")
+shader_parameter/robot_diffuse = ExtResource("9_barrel")
+shader_parameter/robot_normal = ExtResource("10_barrel_normal")
+shader_parameter/eye_power = 1.0
+shader_parameter/damage_origin = Vector2(0, 0)
+shader_parameter/damage_radius = 12.0
+shader_parameter/damage_pulse = 0.0
+shader_parameter/hit_origin = Vector2(0, 0)
+shader_parameter/hit_displacement = Vector2(0, 0)
+shader_parameter/hit_radius = 20.0
+shader_parameter/hit_body_bottom = 0.0
+
+[sub_resource type="CanvasTexture" id="BarrelCanvas"]
+diffuse_texture = ExtResource("9_barrel")
+normal_texture = ExtResource("10_barrel_normal")
+
+[sub_resource type="AtlasTexture" id="BarrelIdle"]
+atlas = SubResource("BarrelCanvas")
+region = Rect2(0, 0, 16, 8)
+filter_clip = true
+
+[sub_resource type="CanvasItemMaterial" id="ChargeMaterial"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="ChargeGradient"]
+colors = PackedColorArray(1, 0.9, 0.6, 1, 1, 0.13, 0.08, 0)
+
+[sub_resource type="GradientTexture2D" id="ChargeGlow"]
+gradient = SubResource("ChargeGradient")
+width = 20
+height = 20
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="Sentry" unique_id=1665023034 instance=ExtResource("1_base")]
+script = ExtResource("6_sentry")
+preferred_distance = 155.0
+aim_margin = 8.0
+reposition_speed = 86.0
+max_health = 190
+move_speed = 110.0
+stop_distance = 85.0
+patrol_speed = 31.0
+patrol_radius = 86.0
+sight_radius = 350.0
+wake_radius = 240.0
+
+[node name="Hurtbox" parent="." index="1"]
+position = Vector2(0, -34)
+frames = ExtResource("4_hurtbox")
+
+[node name="Visual" parent="." index="2"]
+run_rate = 0.88
+armor_break_offset = Vector2(12, -13)
+collapse_offset = Vector2(-3, 17)
+eye_offsets = PackedVector2Array(-6.9, -21.3, -6.9, -21.3, -8.9, -19.3, -6.9, -19.3, -6.9, -21.3, -6.9, -22.3, -8.9, -24.3, -6.9, -22.3, -6.9, -22.3)
+death_eye_offsets = PackedVector2Array(-6.9, -21.3, -6.9, -20.3, -6.9, -18.3, -9.25, -14.25)
+eye_energy = 0.52
+eye_radius = 48.0
+
+[node name="Sprite" parent="Visual" index="1"]
+material = SubResource("ShaderMaterial_robot")
+sprite_frames = SubResource("SpriteFrames_robot")
+animation = &"idle"
+
+[node name="Eye" parent="Visual/Sprite" index="0"]
+texture = ExtResource("2_sheet")
+hframes = 9
+vframes = 9
+frame = 9
+
+[node name="Weapon" type="Node2D" parent="Visual" index="4" unique_id=1044598986]
+position = Vector2(-11, -41.5)
+script = ExtResource("7_weapon")
+projectile_scene = ExtResource("8_bolt")
+shooting_range = 320.0
+mount_offsets = PackedVector2Array(-11, -21.5, -11, -21.5, -13, -19.5, -11, -19.5, -11, -21.5, -11, -22.5, -13, -24.5, -11, -22.5, -11, -22.5)
+
+[node name="Pivot" type="Node2D" parent="Visual/Weapon" index="0" unique_id=1978919883]
+
+[node name="Barrel" type="Sprite2D" parent="Visual/Weapon/Pivot" index="0" unique_id=676997256]
+material = SubResource("BarrelMaterial")
+texture = SubResource("BarrelIdle")
+centered = false
+offset = Vector2(-12, -3.5)
+
+[node name="Muzzle" type="Marker2D" parent="Visual/Weapon/Pivot" index="1" unique_id=1401785366]
+position = Vector2(-12, 0)
+
+[node name="Charge" type="Sprite2D" parent="Visual/Weapon/Pivot/Muzzle" index="0" unique_id=1886447102]
+visible = false
+material = SubResource("ChargeMaterial")
+texture = SubResource("ChargeGlow")
+
+[node name="Shots" type="Node2D" parent="Visual/Weapon" index="1" unique_id=676517079]
+top_level = true
+
+[node name="ShotSound" type="AudioStreamPlayer2D" parent="Visual/Weapon" index="2"]
+stream = ExtResource("11_shot_sound")
+volume_db = -18.0
+pitch_scale = 0.7
+max_polyphony = 4
+max_distance = 850.0

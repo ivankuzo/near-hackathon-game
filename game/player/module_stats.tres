@@ -1,0 +1,22 @@
+[gd_resource type="Resource" format=3 uid="uid://duxxrmulixn7l"]
+
+[ext_resource type="Script" path="res://player/module_stats.gd" id="1_stats"]
+
+[resource]
+script = ExtResource("1_stats")
+bonuses = Dictionary[String, Vector2i]({
+"Body_A_Box": Vector2i(50, -8),
+"Body_B_Wedge": Vector2i(25, 4),
+"Body_C_LightFrame": Vector2i(0, 0),
+"Body_D_Sphere": Vector2i(35, -2),
+"Head_A_Visor": Vector2i(10, -1),
+"Head_B_Camera": Vector2i(0, 0),
+"Left_A_Manipulator": Vector2i(0, 0),
+"Legs_A_Standard": Vector2i(40, -20),
+"Legs_B_Insect": Vector2i(-10, 45),
+"Legs_C_Light": Vector2i(0, 0),
+"Right_A_Gripper": Vector2i(15, -2),
+"Right_B_Welder": Vector2i(5, 1),
+"Right_C_LightRocket": Vector2i(20, -3),
+"Right_L02_NeedleDriver": Vector2i(0, 0)
+})

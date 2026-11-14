@@ -1,0 +1,65 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bvrbcfytgfbio"]
+
+[ext_resource type="Texture2D" path="res://player/art/robot/atlases/left_tool_canvas.tres" id="1_atlas"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_0"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 0, 112, 112)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_left_pulse_0"]
+atlas = ExtResource("1_atlas")
+region = Rect2(112, 0, 112, 112)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_left_pulse_1"]
+atlas = ExtResource("1_atlas")
+region = Rect2(224, 0, 112, 112)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_left_pulse_2"]
+atlas = ExtResource("1_atlas")
+region = Rect2(336, 0, 112, 112)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_left_pulse_3"]
+atlas = ExtResource("1_atlas")
+region = Rect2(448, 0, 112, 112)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_left_pulse_4"]
+atlas = ExtResource("1_atlas")
+region = Rect2(560, 0, 112, 112)
+filter_clip = true
+
+[resource]
+resource_name = "Left_A_Manipulator"
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_0")
+}],
+"loop": 0,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.8,
+"texture": SubResource("AtlasTexture_left_pulse_0")
+}, {
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_left_pulse_1")
+}, {
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_left_pulse_2")
+}, {
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_left_pulse_3")
+}, {
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_left_pulse_4")
+}],
+"loop": 0,
+"name": &"left_pulse",
+"speed": 20.0
+}]

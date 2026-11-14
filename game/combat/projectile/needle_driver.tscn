@@ -1,0 +1,11 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://combat/projectile/bullet.tscn" id="1_base"]
+[ext_resource type="SpriteFrames" path="res://combat/projectile/art/needle_driver_frames.tres" id="2_frames"]
+[ext_resource type="AudioStream" path="res://combat/projectile/sounds/laserSmall_000.ogg" id="3_sound"]
+[node name="NeedleDriver" instance=ExtResource("1_base")]
+damage = 20
+shots_per_second = 2.4
+shot_sound = ExtResource("3_sound")
+light_color = Color(0.55, 0.73, 0.81, 1)
+[node name="Sprite2D" parent="." index="0"]
+sprite_frames = ExtResource("2_frames")

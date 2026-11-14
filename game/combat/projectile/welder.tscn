@@ -1,0 +1,16 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://combat/projectile/bullet.tscn" id="1_base"]
+[ext_resource type="SpriteFrames" path="res://combat/projectile/art/welder_frames.tres" id="2_frames"]
+[ext_resource type="AudioStream" path="res://combat/projectile/sounds/laserSmall_004.ogg" id="3_sound"]
+[node name="Welder" instance=ExtResource("1_base")]
+damage = 19
+shots_per_second = 2.8
+shot_sound = ExtResource("3_sound")
+shot_pitch_scale = 0.8
+shot_shake_amplitude = 1.2
+shot_shake_duration = 0.09
+shot_shake_frequency = 30.0
+speed = 500.0
+light_color = Color(0.78, 0.57, 0.34, 1)
+[node name="Sprite2D" parent="." index="0"]
+sprite_frames = ExtResource("2_frames")

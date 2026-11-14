@@ -1,0 +1,20 @@
+{
+  "name": "robot-economy-prototype",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.22.2" },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "verify:testnet": "node services/verify-testnet.js",
+    "verify:service": "node services/verify-game-service.js",
+    "verify:auto-sale": "node services/verify-auto-sale.js",
+    "verify:nep245": "node services/verify-nep245.js",
+    "relayer": "node services/relayer.js",
+    "game-service": "node services/game-service.js",
+    "npc": "node services/npc.js"
+  },
+  "dependencies": {
+    "borsh": "^2.0.0",
+    "near-api-js": "^7.5.3"
+  }
+}

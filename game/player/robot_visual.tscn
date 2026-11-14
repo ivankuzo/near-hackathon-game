@@ -1,0 +1,95 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://player/robot_visual.gd" id="1_visual"]
+[ext_resource type="SpriteFrames" path="res://player/art/robot/modules/legs/Legs_C_Light.tres" id="2_legs"]
+[ext_resource type="Texture2D" path="res://player/art/robot/modules/body/Body_C_LightFrame.tres" id="3_body"]
+[ext_resource type="Texture2D" path="res://player/art/robot/modules/head/Head_B_Camera.tres" id="4_head"]
+[ext_resource type="SpriteFrames" path="res://player/art/robot/modules/left_tool/Left_A_Manipulator.tres" id="5_left"]
+[ext_resource type="Texture2D" path="res://player/art/robot/modules/right_tool/Right_L02_NeedleDriver_upper_arm.tres" id="6_upper"]
+[ext_resource type="Texture2D" path="res://player/art/robot/modules/right_tool/Right_L02_NeedleDriver_forearm.tres" id="7_forearm"]
+
+[ext_resource type="Script" path="res://player/walk_motion.gd" id="8_walk_motion"]
+
+[sub_resource type="Gradient" id="Gradient_armor_light"]
+offsets = PackedFloat32Array(0, 0.3, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="Texture_armor_light"]
+gradient = SubResource("Gradient_armor_light")
+width = 192
+height = 192
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="RobotVisual" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_visual")
+
+[node name="CanvasOrigin" type="Node2D" parent="."]
+position = Vector2(-63, -101)
+
+[node name="Legs" type="AnimatedSprite2D" parent="CanvasOrigin"]
+light_mask = 10
+centered = false
+sprite_frames = ExtResource("2_legs")
+animation = &"idle"
+
+[node name="Body" type="Sprite2D" parent="CanvasOrigin"]
+light_mask = 10
+centered = false
+texture = ExtResource("3_body")
+
+[node name="Head" type="Sprite2D" parent="CanvasOrigin"]
+light_mask = 10
+centered = false
+texture = ExtResource("4_head")
+
+[node name="LeftTool" type="AnimatedSprite2D" parent="CanvasOrigin"]
+light_mask = 10
+centered = false
+sprite_frames = ExtResource("5_left")
+animation = &"idle"
+
+[node name="RightShoulder" type="Node2D" parent="CanvasOrigin"]
+position = Vector2(82, 40)
+
+[node name="UpperArm" type="Sprite2D" parent="CanvasOrigin/RightShoulder"]
+light_mask = 10
+centered = false
+position = Vector2(-82, -40)
+texture = ExtResource("6_upper")
+
+[node name="Elbow" type="Node2D" parent="CanvasOrigin/RightShoulder"]
+position = Vector2(19.5, 9.5)
+
+[node name="Forearm" type="Sprite2D" parent="CanvasOrigin/RightShoulder/Elbow"]
+light_mask = 10
+centered = false
+position = Vector2(-101.5, -49.5)
+texture = ExtResource("7_forearm")
+
+[node name="Muzzle" type="Marker2D" parent="CanvasOrigin/RightShoulder/Elbow/Forearm"]
+position = Vector2(92.5, 77.5)
+
+[node name="ArmorLight" type="PointLight2D" parent="CanvasOrigin/RightShoulder/Elbow"]
+texture_filter = 2
+position = Vector2(-8, 12)
+color = Color(0.78, 0.9, 1, 1)
+energy = 0.65
+range_item_cull_mask = 8
+texture = SubResource("Texture_armor_light")
+height = 72.0
+
+[node name="WalkMotion" type="Node" parent="." node_paths=PackedStringArray("legs", "body", "head", "free_arm", "weapon_shoulder")]
+script = ExtResource("8_walk_motion")
+legs = NodePath("../CanvasOrigin/Legs")
+body = NodePath("../CanvasOrigin/Body")
+head = NodePath("../CanvasOrigin/Head")
+free_arm = NodePath("../CanvasOrigin/LeftTool")
+weapon_shoulder = NodePath("../CanvasOrigin/RightShoulder")
+chassis_motion = Dictionary[String, Vector3]({
+"Legs_A_Standard": Vector3(2, 1.25, 3.5),
+"Legs_B_Insect": Vector3(0.8, 1.2, 1.5),
+"Legs_C_Light": Vector3(1.5, 0.8, 3)
+})

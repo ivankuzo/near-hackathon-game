@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://world/ore/ore_shard.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://world/ore/art/iron_canvas.tres" id="2_texture"]
+[ext_resource type="Texture2D" path="res://world/ore/art/iron_emission.png" id="3_emission"]
+
+[node name="IronOre" instance=ExtResource("1_base")]
+ore_type = &"iron"
+glow_color = Color(0.78, 0.9, 1, 1)
+
+[node name="Sprite" parent="Visual" index="0"]
+texture = ExtResource("2_texture")
+
+[node name="Emission" parent="Visual" index="1"]
+texture = ExtResource("3_emission")

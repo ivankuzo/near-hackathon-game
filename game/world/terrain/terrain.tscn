@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="TileSet" uid="uid://bjjlpukv87isy" path="res://world/terrain/grass_tileset.tres" id="3_grass"]
+[ext_resource type="Script" path="res://world/terrain/terrain_stream.gd" id="1_stream"]
+[ext_resource type="Shader" path="res://world/terrain/ground_lighting.gdshader" id="4_lighting"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ground_lighting"]
+shader = ExtResource("4_lighting")
+
+[node name="Terrain" type="Node2D"]
+script = ExtResource("1_stream")
+
+[node name="Floor" type="TileMapLayer" parent="." unique_id=193224315]
+rendering_quadrant_size = 1
+material = SubResource("ShaderMaterial_ground_lighting")
+z_index = -10
+tile_set = ExtResource("3_grass")
+collision_enabled = false

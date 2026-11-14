@@ -1,0 +1,38 @@
+{
+  "network": "testnet",
+  "contractId": "robot-contract-7133014f3f.testnet",
+  "accounts": {
+    "contract": "robot-contract-7133014f3f.testnet",
+    "npc": "robot-npc-7133014f3f.testnet",
+    "player": "robot-player-7133014f3f.testnet",
+    "relayer": "robot-relayer-7133014f3f.testnet"
+  },
+  "transactions": {
+    "deploy": "3A7NhX3ZJrbT79unN2YrvWhk86iDp9G62Nc5mikwSSJ3",
+    "upgrade_auto_sale": "AMa4ShVHhdHy2hE8DhaS8fqUDZqQYfFXckmGuo1vSJDj",
+    "final_build_deploy": "GcBXdoMRX3mevnYnsPHgEsXFk7iYhnEYiDrzgYCoAcPZ",
+    "auto_sale_bid": "S4dwgJanHSXHDiUjdE4NsnK5QLbhhbAtxFAiJHaSvnS",
+    "auto_sale_settlement": "FDVmfEkTucAmmWjxAToZZxVbK4y5R1NTmX9EeZP5SLM9",
+    "nep245_transfer": "DaThJ9G4ym9R6a18NVsA9z3XTDobd6MzxJGSDPs2fvZf",
+    "nep245_batch_transfer": "97mg3Ecz6cZ6WGbrsJXb2Wg27c8s6qTfzf5LgCJmLnQC",
+    "contract_new_1": "Hh6cMvKsv9388uoevaF8jpNtnji9GAMaHuUuyhZwMNbx",
+    "contract_grant_2": "8JFTiKHgGrFK6mgcwEhUL29ZsTpWVjQU26brwr1GGUty",
+    "contract_grant_3": "EYpAr9s2JTeKaoHx3kxQKjXCwg1cXqoqrJWNyTRvfTBi",
+    "contract_grant_4": "F9UUtkZwGtZJ5je3wkEEWndy6HpneTE4KRsXKGZ7Jzk7",
+    "contract_grant_5": "35r5QknjoHWRBkuZ3pTe9mrFBqdvFYCuQGJM4BitbTUN",
+    "contract_grant_6": "5MLkkEYgqYTYQ6xb2NgpXHXTxMBiTusahiUeq6r4GRvo",
+    "npc_place_order_7": "32and2CaFMsRKLEg584RuKSgQxwbc5yTjbny5RX1f9Tr",
+    "contract_settle_run_8": "ye1G38GUpMLwwYy1Cv3u9aTCWmm6EuZLZZP6oi8iWE1",
+    "relayed_sale": "C53c4tjEPV5obGVe698ASMGuGmgk1LDLiYYmwX7NxBPb",
+    "npc_manufacture_10": "9iGukunRnmMhxH5wRmS8teLhd2r3YGUBDyQp7dmBoycy",
+    "npc_place_order_11": "EDpwLRaawhA11fcrKBPtbezkVKduUuYNcw4UFP37nuM2",
+    "player_fill_order_12": "F5HEMzZe5aZhiRmWbULc7NrXA5ivvwNY9LMTdmwDebpb",
+    "contract_settle_run_13": "HyQ2EA9tAqZp8uZ5CMJ2pe7Dp3QiZDbY9zSggoCQS8f4"
+  },
+  "final": {
+    "player_iron": "0",
+    "player_credit": "95",
+    "player_plasma": "0",
+    "npc_iron": "31"
+  }
+}

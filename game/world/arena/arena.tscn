@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://ddyytrpnkps4f"]
+
+[ext_resource type="PackedScene" uid="uid://unmbl8t87ayq" path="res://player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://ui/aim/crosshair.tscn" id="2_crosshair"]
+[ext_resource type="PackedScene" path="res://world/terrain/terrain.tscn" id="3_terrain"]
+[ext_resource type="PackedScene" path="res://world/stone/stone_map.tscn" id="4_stone"]
+[ext_resource type="Script" uid="uid://b1ifcdyonb00g" path="res://world/arena/arena.gd" id="5_arena"]
+[ext_resource type="PackedScene" path="res://world/arena/enemy_spawner.tscn" id="6_enemies"]
+[ext_resource type="PackedScene" path="res://ui/ore/ore_counters.tscn" id="7_ore_counters"]
+[ext_resource type="PackedScene" path="res://effects/camera_shake/camera_shake_source.tscn" id="8_shake"]
+
+[ext_resource type="Script" path="res://world/arena/arena_light_budget.gd" id="9_light_budget"]
+
+[ext_resource type="Script" path="res://world/stone/stone_light_projection.gd" id="10_stone_projection"]
+[ext_resource type="PackedScene" path="res://ui/health/health_bar.tscn" id="11_health_bar"]
+[ext_resource type="Script" path="res://ui/damage_vignette.gd" id="12_vignette_script"]
+[ext_resource type="Shader" path="res://ui/damage_vignette.gdshader" id="13_vignette_shader"]
+[ext_resource type="FontFile" path="res://ui/fonts/m6x11.tres" id="14_timer_font"]
+[ext_resource type="PackedScene" path="res://ui/fail_screen.tscn" id="15_fail_screen"]
+[ext_resource type="PackedScene" path="res://ui/onboarding.tscn" id="16_onboarding"]
+
+[sub_resource type="ShaderMaterial" id="DamageVignetteMaterial"]
+shader = ExtResource("13_vignette_shader")
+
+[node name="Arena" type="Node2D" unique_id=1173314889 node_paths=PackedStringArray("ore_collector", "ore_counters", "camera", "terrain", "stone_map", "player", "enemy_spawner", "ore_drops")]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("5_arena")
+ore_collector = NodePath("Player/OreCollector")
+ore_counters = NodePath("Instructions/OreCounters")
+camera = NodePath("Player/Camera2D")
+terrain = NodePath("Terrain")
+stone_map = NodePath("StonePatch")
+player = NodePath("Player")
+enemy_spawner = NodePath("EnemySpawner")
+ore_drops = NodePath("StonePatch/OreDrops")
+run_duration = 300.0
+
+[node name="Night" type="CanvasModulate" parent="." unique_id=1716172584]
+color = Color(0.017860003, 0.008399999, 0.06, 1)
+
+[node name="Terrain" parent="." unique_id=2128256876 instance=ExtResource("3_terrain")]
+
+[node name="StonePatch" parent="." unique_id=1912420747 instance=ExtResource("4_stone")]
+health = 200
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=408399882]
+y_sort_enabled = true
+
+[node name="DeathDebris" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Onboarding" parent="." instance=ExtResource("16_onboarding")]
+
+[node name="EnemySpawner" parent="." unique_id=1815563089 node_paths=PackedStringArray("terrain", "stones", "observer", "headlamp") instance=ExtResource("6_enemies")]
+terrain = NodePath("../Terrain")
+stones = NodePath("../StonePatch")
+observer = NodePath("../Player")
+headlamp = NodePath("../Player/Headlamp")
+
+[node name="Player" parent="." unique_id=1411379987 node_paths=PackedStringArray("projectile_parent") instance=ExtResource("1_player")]
+position = Vector2(0, 16)
+projectile_parent = NodePath("../Projectiles")
+
+[node name="Crosshair" parent="." unique_id=1987216053 instance=ExtResource("2_crosshair")]
+
+[node name="Instructions" type="CanvasLayer" parent="." unique_id=1383389147]
+
+[node name="DamageVignette" type="ColorRect" parent="Instructions"]
+modulate = Color(1, 1, 1, 0)
+material = SubResource("DamageVignetteMaterial")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("12_vignette_script")
+
+[node name="Health" parent="Instructions" instance=ExtResource("11_health_bar")]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 217.0
+offset_bottom = 34.0
+
+[node name="OreCounters" parent="Instructions" unique_id=326545665 instance=ExtResource("7_ore_counters")]
+
+[node name="SurviveHint" type="Label" parent="Instructions"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_bottom = -16.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("14_timer_font")
+theme_override_font_sizes/font_size = 24
+text = "SURVIVE FOR"
+
+[node name="RunTimer" type="Label" parent="Instructions"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -48.0
+offset_right = 60.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("14_timer_font")
+theme_override_font_sizes/font_size = 24
+text = "00:15"
+horizontal_alignment = 1
+
+[node name="FailScreen" parent="Instructions" instance=ExtResource("15_fail_screen")]
+
+[node name="OrePickupShake" parent="." unique_id=621004472 instance=ExtResource("8_shake")]
+amplitude = 1.8
+duration = 0.12
+frequency = 28.0
+
+[node name="EnemyDeathShake" parent="." instance=ExtResource("8_shake")]
+amplitude = 3.5
+duration = 0.2
+frequency = 22.0
+
+[node name="PlayerDamageShake" parent="." instance=ExtResource("8_shake")]
+amplitude = 3.0
+duration = 0.16
+frequency = 26.0
+
+[node name="FailShake" parent="." instance=ExtResource("8_shake")]
+amplitude = 10.0
+duration = 0.3
+frequency = 22.0
+
+[node name="StoneCrackShake" parent="." unique_id=1518582371 instance=ExtResource("8_shake")]
+amplitude = 2.8
+duration = 0.13
+frequency = 28.0
+
+[node name="StoneBreakShake" parent="." unique_id=979194919 instance=ExtResource("8_shake")]
+amplitude = 4.2
+duration = 0.2
+frequency = 22.0
+
+[node name="LightBudget" type="Node" parent="." node_paths=PackedStringArray("observer", "essential_lights")]
+process_priority = 100
+script = ExtResource("9_light_budget")
+observer = NodePath("../Player")
+essential_lights = [NodePath("../Player/Headlamp"), NodePath("../Player/FillLight"), NodePath("../Player/MuzzleFlash"), NodePath("../Player/RobotVisual/CanvasOrigin/RightShoulder/Elbow/ArmorLight")]
+
+[node name="StoneLightProjection" type="Node" parent="." node_paths=PackedStringArray("surfaces", "sources")]
+process_priority = 150
+script = ExtResource("10_stone_projection")
+surfaces = NodePath("../StonePatch/StoneVisuals")
+sources = [NodePath("../Player/Headlamp"), NodePath("../Player/FillLight")]
+
+[connection signal="blocks_changed" from="Terrain" to="StonePatch" method="update_blocks"]
+[connection signal="stone_broken" from="StonePatch" to="StoneBreakShake" method="trigger" unbinds=2]
+[connection signal="stone_cracked" from="StonePatch" to="StoneCrackShake" method="trigger" unbinds=1]
+[connection signal="collected" from="Player/OreCollector" to="OrePickupShake" method="trigger" unbinds=3]
+[connection signal="child_entered_tree" from="Projectiles" to="." method="_on_projectile_entered"]
+[connection signal="shake_requested" from="OrePickupShake" to="Player/Camera2D/CameraShake" method="shake"]
+[connection signal="shake_requested" from="EnemyDeathShake" to="Player/Camera2D/CameraShake" method="shake"]
+[connection signal="shake_requested" from="PlayerDamageShake" to="Player/Camera2D/CameraShake" method="shake"]
+[connection signal="shake_requested" from="FailShake" to="Player/Camera2D/CameraShake" method="shake"]
+[connection signal="shake_requested" from="StoneCrackShake" to="Player/Camera2D/CameraShake" method="shake"]
+[connection signal="shake_requested" from="StoneBreakShake" to="Player/Camera2D/CameraShake" method="shake"]

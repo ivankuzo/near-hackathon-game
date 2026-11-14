@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://enemies/robots/robot_chaser.gd" id="1_chaser"]
+[ext_resource type="Shader" path="res://enemies/robots/robot_lighting.gdshader" id="2_lighting"]
+
+[ext_resource type="Script" path="res://enemies/robots/robot_enemy_visual.gd" id="3_visual"]
+
+[ext_resource type="Script" path="res://combat/hurtbox/animated_hurtbox.gd" id="4_hurtbox"]
+
+[ext_resource type="PackedScene" path="res://enemies/robots/robot_impact_fx.tscn" id="5_impact"]
+
+[ext_resource type="PackedScene" path="res://effects/contact_shadow/contact_shadow.tscn" id="6_shadow"]
+[ext_resource type="AudioStream" path="res://player/damage_hit.mp3" id="damage_sound"]
+[ext_resource type="AudioStream" path="res://enemies/robots/droid_hit.wav" id="death_sound"]
+[ext_resource type="AudioStream" path="res://enemies/robots/activation.mp3" id="9_activation_sound"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_footprint"]
+radius = 11.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_robot"]
+shader = ExtResource("2_lighting")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_unshaded"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_eye_light"]
+offsets = PackedFloat32Array(0, 0.33, 0.72, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.72, 1, 1, 1, 0.16, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eye_light"]
+gradient = SubResource("Gradient_eye_light")
+width = 96
+height = 96
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="RobotEnemy" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 8
+collision_mask = 9
+motion_mode = 1
+script = ExtResource("1_chaser")
+
+[node name="Footprint" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_footprint")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+material = SubResource("CanvasItemMaterial_unshaded")
+position = Vector2(0, -16.5)
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_hurtbox")
+
+[node name="ActivationSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_activation_sound")
+volume_db = 2.0
+max_distance = 850.0
+
+[node name="Visual" type="Node2D" parent="."]
+script = ExtResource("3_visual")
+
+[node name="Shadow" parent="Visual" instance=ExtResource("6_shadow")]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+position = Vector2(0, -20)
+material = SubResource("ShaderMaterial_robot")
+
+[node name="Eye" type="Sprite2D" parent="Visual/Sprite"]
+material = SubResource("CanvasItemMaterial_unshaded")
+
+[node name="EyeLight" type="PointLight2D" parent="Visual"]
+texture_filter = 2
+color = Color(1, 0.055, 0.075, 1)
+range_item_cull_mask = 3
+height = 24.0
+texture = SubResource("GradientTexture2D_eye_light")
+
+[node name="ImpactFX" parent="Visual" instance=ExtResource("5_impact")]
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Visual"]
+stream = ExtResource("damage_sound")
+volume_db = -14.0
+max_polyphony = 4
+max_distance = 850.0
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="Visual"]
+stream = ExtResource("damage_sound")
+volume_db = -8.0
+max_polyphony = 2
+max_distance = 850.0
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="Visual"]
+stream = ExtResource("death_sound")
+volume_db = -14.0
+max_distance = 850.0

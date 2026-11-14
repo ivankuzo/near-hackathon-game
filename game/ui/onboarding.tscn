@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://ui/onboarding.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://ui/fonts/m6x11.tres" id="2_font"]
+[ext_resource type="Script" path="res://ui/onboarding_controls.gd" id="3_controls"]
+
+[sub_resource type="CanvasItemMaterial" id="Unshaded"]
+light_mode = 1
+
+[node name="Onboarding" type="Node2D"]
+z_index = 100
+material = SubResource("Unshaded")
+script = ExtResource("1_script")
+
+[node name="PromptLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Prompt" type="Label" parent="PromptLayer"]
+visible = false
+offset_right = 320.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.91, 0.94, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.06, 0.07, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Controls" type="Control" parent="PromptLayer"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -117.0
+offset_top = 110.0
+offset_right = 117.0
+offset_bottom = 214.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("3_controls")
+font = ExtResource("2_font")

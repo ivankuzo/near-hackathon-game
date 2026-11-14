@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://world/stone/stone_chip_burst.tscn" id="1_chips"]
+
+[node name="StoneBreakBurst" instance=ExtResource("1_chips")]
+amount = 72
+lifetime = 0.42
+explosiveness = 0.86
+spread = 180.0
+initial_velocity_min = 24.0
+initial_velocity_max = 86.0
+scale_amount_min = 1.0
+scale_amount_max = 2.8

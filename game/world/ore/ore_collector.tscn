@@ -1,0 +1,43 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://world/ore/ore_collector.gd" id="1_script"]
+[ext_resource type="Script" path="res://effects/particle_burst/particle_burst.gd" id="2_burst"]
+[ext_resource type="PackedScene" path="res://world/ore/ore_pickup_sparks.tscn" id="3_sparks"]
+[ext_resource type="AudioStream" path="res://ui/sounds/handleCoins2.ogg" id="4_pickup_sound"]
+[sub_resource type="CircleShape2D" id="Radius"]
+radius = 68.0
+[sub_resource type="CanvasItemMaterial" id="Additive"]
+blend_mode = 1
+light_mode = 1
+[sub_resource type="Gradient" id="FlashGradient"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="GradientTexture2D" id="FlashTexture"]
+gradient = SubResource("FlashGradient")
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+[node name="OreCollector" type="Area2D"]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+monitoring = false
+script = ExtResource("1_script")
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("Radius")
+[node name="ScanTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.12
+autostart = true
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pickup_sound")
+volume_db = -10.0
+max_polyphony = 3
+[node name="Sparks" type="Node2D" parent="."]
+script = ExtResource("2_burst")
+burst_scene = ExtResource("3_sparks")
+[node name="Flash" type="Sprite2D" parent="."]
+z_index = 4
+self_modulate = Color(1, 1, 1, 0)
+material = SubResource("Additive")
+texture = SubResource("FlashTexture")

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://combat/hurtbox/hurtbox_frames.gd" id="1_frames"]
+
+[resource]
+script = ExtResource("1_frames")
+polygons_by_frame = Dictionary[Vector2i, Array]({
+Vector2i(0, 0): [
+PackedVector2Array(6, -33, 14, -33, 14, -32, 6, -32),
+PackedVector2Array(4, -32, 18, -32, 18, -31, 4, -31),
+PackedVector2Array(2, -31, 18, -31, 18, -30, 2, -30),
+PackedVector2Array(0, -30, 19, -30, 19, -28, 0, -28),
+PackedVector2Array(1, -28, 19, -28, 19, -26, 1, -26),
+PackedVector2Array(1, -26, 18, -26, 18, -24, 17, -23, 2, -23, 1, -24),
+PackedVector2Array(4, -23, 16, -23, 16, -22, 4, -22),
+PackedVector2Array(5, -22, 14, -22, 14, -21, 5, -21),
+PackedVector2Array(6, -21, 12, -21, 12, -19, 7, -19, 6, -20)
+],
+Vector2i(112, 0): [
+PackedVector2Array(10, -33, 13, -33, 13, -32, 10, -32),
+PackedVector2Array(7, -32, 14, -32, 14, -31, 7, -31),
+PackedVector2Array(3, -29, 5, -31, 15, -31, 17, -29, 17, -28, 3, -28),
+PackedVector2Array(2, -27, 3, -28, 18, -28, 18, -24, 3, -24, 2, -25),
+PackedVector2Array(2, -24, 17, -24, 17, -22, 15, -20, 4, -20, 2, -22),
+PackedVector2Array(6, -20, 13, -20, 13, -19, 6, -19),
+PackedVector2Array(6, -19, 12, -19, 12, -17, 6, -17)
+]
+})

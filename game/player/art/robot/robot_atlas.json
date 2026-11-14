@@ -1,0 +1,551 @@
+{
+	"schema_version": 1.0,
+	"source": "art/robots/white_sets/main_robot_three_colors.aseprite",
+	"source_sha256": "949250a88745af2bb789eb8a67f11f24a34456be2df960524bc864b4b4d38d09",
+	"cell_size": [
+		112.0,
+		112.0
+	],
+	"draw_order": [
+		"legs",
+		"body",
+		"head",
+		"left_tool",
+		"right_tool"
+	],
+	"mounts": {
+		"neck": {
+			"x": 65.0,
+			"y": 35.0
+		},
+		"left_shoulder": {
+			"x": 50.0,
+			"y": 39.0
+		},
+		"right_shoulder": {
+			"x": 82.0,
+			"y": 40.0
+		},
+		"waist": {
+			"x": 63.0,
+			"y": 59.0
+		}
+	},
+	"atlases": {
+		"legs": {
+			"path": "res://player/art/robot/atlases/legs.png",
+			"columns": 5.0,
+			"rows": 3.0
+		},
+		"body": {
+			"path": "res://player/art/robot/atlases/body.png",
+			"columns": 4.0,
+			"rows": 1.0
+		},
+		"head": {
+			"path": "res://player/art/robot/atlases/head.png",
+			"columns": 2.0,
+			"rows": 1.0
+		},
+		"left_tool": {
+			"path": "res://player/art/robot/atlases/left_tool.png",
+			"columns": 6.0,
+			"rows": 1.0
+		},
+		"right_tool": {
+			"path": "res://player/art/robot/atlases/right_tool.png",
+			"columns": 2.0,
+			"rows": 4.0
+		}
+	},
+	"modules": {
+		"legs": {
+			"Legs_A_Standard": {
+				"sprite_frames": "res://player/art/robot/modules/legs/Legs_A_Standard.tres",
+				"animations": {
+					"idle": {
+						"loop": false,
+						"frames": [
+							{
+								"rect": [
+									0.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 1.0
+							}
+						]
+					},
+					"walk": {
+						"loop": true,
+						"frames": [
+							{
+								"rect": [
+									112.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 2.0
+							},
+							{
+								"rect": [
+									224.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 3.0
+							},
+							{
+								"rect": [
+									336.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 4.0
+							},
+							{
+								"rect": [
+									448.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 5.0
+							}
+						]
+					}
+				},
+				"ground_anchor": {
+					"x": 63.0,
+					"y": 101.0
+				}
+			},
+			"Legs_B_Insect": {
+				"sprite_frames": "res://player/art/robot/modules/legs/Legs_B_Insect.tres",
+				"animations": {
+					"idle": {
+						"loop": false,
+						"frames": [
+							{
+								"rect": [
+									0.0,
+									112.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 1.0
+							}
+						]
+					},
+					"walk": {
+						"loop": true,
+						"frames": [
+							{
+								"rect": [
+									112.0,
+									112.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 2.0
+							},
+							{
+								"rect": [
+									224.0,
+									112.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 3.0
+							},
+							{
+								"rect": [
+									336.0,
+									112.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 4.0
+							},
+							{
+								"rect": [
+									448.0,
+									112.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 5.0
+							}
+						]
+					}
+				},
+				"ground_anchor": {
+					"x": 63.0,
+					"y": 98.0
+				}
+			},
+			"Legs_C_Light": {
+				"sprite_frames": "res://player/art/robot/modules/legs/Legs_C_Light.tres",
+				"animations": {
+					"idle": {
+						"loop": false,
+						"frames": [
+							{
+								"rect": [
+									0.0,
+									224.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 1.0
+							}
+						]
+					},
+					"walk": {
+						"loop": true,
+						"frames": [
+							{
+								"rect": [
+									112.0,
+									224.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 2.0
+							},
+							{
+								"rect": [
+									224.0,
+									224.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 3.0
+							},
+							{
+								"rect": [
+									336.0,
+									224.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 4.0
+							},
+							{
+								"rect": [
+									448.0,
+									224.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 5.0
+							}
+						]
+					}
+				},
+				"ground_anchor": {
+					"x": 63.0,
+					"y": 97.0
+				}
+			}
+		},
+		"body": {
+			"Body_A_Box": {
+				"texture": "res://player/art/robot/modules/body/Body_A_Box.tres",
+				"rect": [
+					0.0,
+					0.0,
+					112.0,
+					112.0
+				]
+			},
+			"Body_B_Wedge": {
+				"texture": "res://player/art/robot/modules/body/Body_B_Wedge.tres",
+				"rect": [
+					112.0,
+					0.0,
+					112.0,
+					112.0
+				]
+			},
+			"Body_C_LightFrame": {
+				"texture": "res://player/art/robot/modules/body/Body_C_LightFrame.tres",
+				"rect": [
+					224.0,
+					0.0,
+					112.0,
+					112.0
+				]
+			},
+			"Body_D_Sphere": {
+				"texture": "res://player/art/robot/modules/body/Body_D_Sphere.tres",
+				"rect": [
+					336.0,
+					0.0,
+					112.0,
+					112.0
+				]
+			}
+		},
+		"head": {
+			"Head_A_Visor": {
+				"texture": "res://player/art/robot/modules/head/Head_A_Visor.tres",
+				"light_origin": {
+					"x": 64.0,
+					"y": 29.5
+				},
+				"rect": [
+					0.0,
+					0.0,
+					112.0,
+					112.0
+				]
+			},
+			"Head_B_Camera": {
+				"texture": "res://player/art/robot/modules/head/Head_B_Camera.tres",
+				"light_origin": {
+					"x": 62.0,
+					"y": 32.5
+				},
+				"rect": [
+					112.0,
+					0.0,
+					112.0,
+					112.0
+				]
+			}
+		},
+		"left_tool": {
+			"Left_A_Manipulator": {
+				"sprite_frames": "res://player/art/robot/modules/left_tool/Left_A_Manipulator.tres",
+				"animations": {
+					"idle": {
+						"loop": false,
+						"frames": [
+							{
+								"rect": [
+									0.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 125.0,
+								"source_frame": 1.0
+							}
+						]
+					},
+					"left_pulse": {
+						"loop": false,
+						"frames": [
+							{
+								"rect": [
+									112.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 90.0,
+								"source_frame": 6.0
+							},
+							{
+								"rect": [
+									224.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 55.0,
+								"source_frame": 7.0
+							},
+							{
+								"rect": [
+									336.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 55.0,
+								"source_frame": 8.0
+							},
+							{
+								"rect": [
+									448.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 70.0,
+								"source_frame": 9.0
+							},
+							{
+								"rect": [
+									560.0,
+									0.0,
+									112.0,
+									112.0
+								],
+								"duration_ms": 70.0,
+								"source_frame": 10.0
+							}
+						],
+						"events": [
+							{
+								"name": "pulse",
+								"frame_index": 1.0,
+								"time_ms": 90.0
+							}
+						]
+					}
+				}
+			}
+		},
+		"right_tool": {
+			"Right_A_Gripper": {
+				"elbow": {
+					"x": 101.5,
+					"y": 49.5
+				},
+				"aim_tip": {
+					"x": 92.5,
+					"y": 77.5
+				},
+				"parts": {
+					"upper_arm": {
+						"texture": "res://player/art/robot/modules/right_tool/Right_A_Gripper_upper_arm.tres",
+						"rect": [
+							0.0,
+							0.0,
+							112.0,
+							112.0
+						]
+					},
+					"forearm": {
+						"texture": "res://player/art/robot/modules/right_tool/Right_A_Gripper_forearm.tres",
+						"rect": [
+							112.0,
+							0.0,
+							112.0,
+							112.0
+						]
+					}
+				}
+			},
+			"Right_B_Welder": {
+				"elbow": {
+					"x": 96.5,
+					"y": 49.5
+				},
+				"aim_tip": {
+					"x": 90.5,
+					"y": 79.0
+				},
+				"parts": {
+					"upper_arm": {
+						"texture": "res://player/art/robot/modules/right_tool/Right_B_Welder_upper_arm.tres",
+						"rect": [
+							0.0,
+							112.0,
+							112.0,
+							112.0
+						]
+					},
+					"forearm": {
+						"texture": "res://player/art/robot/modules/right_tool/Right_B_Welder_forearm.tres",
+						"rect": [
+							112.0,
+							112.0,
+							112.0,
+							112.0
+						]
+					}
+				}
+			},
+			"Right_C_LightRocket": {
+				"elbow": {
+					"x": 96.5,
+					"y": 49.5
+				},
+				"aim_tip": {
+					"x": 88.0,
+					"y": 74.0
+				},
+				"parts": {
+					"upper_arm": {
+						"texture": "res://player/art/robot/modules/right_tool/Right_C_LightRocket_upper_arm.tres",
+						"rect": [
+							0.0,
+							224.0,
+							112.0,
+							112.0
+						]
+					},
+					"forearm": {
+						"texture": "res://player/art/robot/modules/right_tool/Right_C_LightRocket_forearm.tres",
+						"rect": [
+							112.0,
+							224.0,
+							112.0,
+							112.0
+						]
+					}
+				}
+			},
+			"Right_L02_NeedleDriver": {
+				"elbow": {
+					"x": 96.5,
+					"y": 50.5
+				},
+				"aim_tip": {
+					"x": 94.5,
+					"y": 77.5
+				},
+				"parts": {
+					"upper_arm": {
+						"texture": "res://player/art/robot/modules/right_tool/Right_L02_NeedleDriver_upper_arm.tres",
+						"rect": [
+							0.0,
+							336.0,
+							112.0,
+							112.0
+						]
+					},
+					"forearm": {
+						"texture": "res://player/art/robot/modules/right_tool/Right_L02_NeedleDriver_forearm.tres",
+						"rect": [
+							112.0,
+							336.0,
+							112.0,
+							112.0
+						]
+					}
+				}
+			}
+		}
+	},
+	"default_loadout": {
+		"legs": "Legs_C_Light",
+		"body": "Body_C_LightFrame",
+		"head": "Head_B_Camera",
+		"left_tool": "Left_A_Manipulator",
+		"right_tool": "Right_L02_NeedleDriver"
+	}
+}

@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://unmbl8t87ayq"]
+
+[ext_resource type="Script" uid="uid://bpcbwq1sjt07d" path="res://player/player.gd" id="1_player"]
+[ext_resource type="PackedScene" path="res://combat/projectile/gripper.tscn" id="projectile_gripper"]
+[ext_resource type="PackedScene" path="res://combat/projectile/needle_driver.tscn" id="projectile_needle_driver"]
+[ext_resource type="PackedScene" path="res://combat/projectile/light_rocket.tscn" id="projectile_light_rocket"]
+[ext_resource type="PackedScene" path="res://combat/projectile/welder.tscn" id="projectile_welder"]
+[ext_resource type="PackedScene" path="res://effects/camera_shake/camera_shake_source.tscn" id="3_shot_shake"]
+[ext_resource type="Script" uid="uid://dmqu5nljjv7us" path="res://effects/camera_shake/camera_shake.gd" id="4_shake"]
+[ext_resource type="PackedScene" path="res://player/robot_visual.tscn" id="5_robot"]
+[ext_resource type="Texture2D" uid="uid://bawmjaykv862j" path="res://player/headlamp.png" id="6_headlamp"]
+
+[ext_resource type="Script" path="res://player/modular_hurtbox.gd" id="8_hurtbox"]
+[ext_resource type="Resource" path="res://player/hurtboxes/legs.tres" id="10_legs_hurtbox"]
+[ext_resource type="Resource" path="res://player/hurtboxes/body.tres" id="11_body_hurtbox"]
+[ext_resource type="Resource" path="res://player/hurtboxes/head.tres" id="12_head_hurtbox"]
+[ext_resource type="Resource" path="res://player/hurtboxes/left_tool.tres" id="13_left_hurtbox"]
+[ext_resource type="Resource" path="res://player/hurtboxes/right_tool.tres" id="14_right_hurtbox"]
+[ext_resource type="Script" path="res://combat/hurtbox/hurtbox_frames.gd" id="15_hurtbox_frames"]
+
+[ext_resource type="PackedScene" path="res://effects/contact_shadow/contact_shadow.tscn" id="9_shadow"]
+
+[ext_resource type="PackedScene" path="res://world/ore/ore_collector.tscn" id="10_ore_collector"]
+
+[ext_resource type="Script" path="res://player/shadow_safe_light.gd" id="shadow_safe_light"]
+[ext_resource type="AudioStream" path="res://enemies/robots/armor_break.ogg" id="damage_hit_sound"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_standard"]
+resource_local_to_scene = true
+size = Vector2(48, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_insect"]
+resource_local_to_scene = true
+size = Vector2(76, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_light"]
+resource_local_to_scene = true
+size = Vector2(28, 10)
+
+[sub_resource type="Gradient" id="Gradient_local_light"]
+offsets = PackedFloat32Array(0, 0.48, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.42, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_local_light"]
+gradient = SubResource("Gradient_local_light")
+width = 192
+height = 192
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="Player" type="CharacterBody2D" unique_id=2106999278]
+texture_filter = 1
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_player")
+tool_projectiles = Dictionary[String, PackedScene]({
+"Right_A_Gripper": ExtResource("projectile_gripper"),
+"Right_B_Welder": ExtResource("projectile_welder"),
+"Right_C_LightRocket": ExtResource("projectile_light_rocket"),
+"Right_L02_NeedleDriver": ExtResource("projectile_needle_driver")
+})
+headlamp_widths = Dictionary[String, float]({
+"Head_A_Visor": 1.2,
+"Head_B_Camera": 1.0
+})
+headlamp_colors = Dictionary[String, Color]({
+"Head_A_Visor": Color(0.86, 0.84, 1, 1),
+"Head_B_Camera": Color(1, 0.82, 0.65, 1)
+})
+
+[node name="StandardFootprint" type="CollisionShape2D" parent="." unique_id=2011018878]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_standard")
+
+[node name="InsectFootprint" type="CollisionShape2D" parent="." unique_id=338639198]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_insect")
+disabled = true
+
+[node name="LightFootprint" type="CollisionShape2D" parent="." unique_id=956129518]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_light")
+disabled = true
+
+[node name="ProjectileHurtbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("8_hurtbox")
+frames_by_part = Dictionary[StringName, ExtResource("15_hurtbox_frames")]({
+&"legs": ExtResource("10_legs_hurtbox"),
+&"body": ExtResource("11_body_hurtbox"),
+&"head": ExtResource("12_head_hurtbox"),
+&"left_tool": ExtResource("13_left_hurtbox"),
+&"upper_arm": ExtResource("14_right_hurtbox"),
+&"forearm": ExtResource("14_right_hurtbox")
+})
+
+[node name="Shadow" parent="." instance=ExtResource("9_shadow")]
+position = Vector2(0, -4)
+scale = Vector2(2.75, 1.5)
+
+[node name="RobotVisual" parent="." unique_id=1504893064 instance=ExtResource("5_robot")]
+
+[node name="Headlamp" type="PointLight2D" parent="." unique_id=1336829032]
+script = ExtResource("shadow_safe_light")
+texture_filter = 2
+color = Color(1, 0.9, 0.72, 1)
+energy = 0.95
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("6_headlamp")
+
+[node name="FillLight" type="PointLight2D" parent="." unique_id=196587514]
+script = ExtResource("shadow_safe_light")
+texture_filter = 2
+position = Vector2(0, -24)
+color = Color(1, 0.7117342, 0.81414145, 1)
+energy = 0.31
+range_item_cull_mask = 3
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_local_light")
+texture_scale = 1.93
+height = 48.0
+
+[node name="MuzzleFlash" type="PointLight2D" parent="." unique_id=354947933]
+texture_filter = 2
+position = Vector2(2, 0)
+color = Color(1, 0.62, 0.27, 1)
+energy = 0.41
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_local_light")
+texture_scale = 2.87
+height = 32.0
+
+[node name="FireTimer" type="Timer" parent="." unique_id=1015430222]
+process_callback = 0
+one_shot = true
+
+[node name="ShotShake" parent="." unique_id=889554062 instance=ExtResource("3_shot_shake")]
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+volume_db = -25.4
+pitch_scale = 0.7
+max_polyphony = 4
+
+[node name="DamageHitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("damage_hit_sound")
+volume_db = -18.0
+pitch_scale = 0.8
+max_polyphony = 3
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=114937831]
+process_physics_priority = 1
+position = Vector2(0, -12)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="CameraShake" type="Node" parent="Camera2D" unique_id=803415244 node_paths=PackedStringArray("camera")]
+script = ExtResource("4_shake")
+camera = NodePath("..")
+
+[connection signal="shake_requested" from="ShotShake" to="Camera2D/CameraShake" method="shake"]
+
+[node name="OreCollector" parent="." node_paths=PackedStringArray("target") instance=ExtResource("10_ore_collector")]
+target = NodePath("..")

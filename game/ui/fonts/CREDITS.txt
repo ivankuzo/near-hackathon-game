@@ -1,0 +1,6 @@
+m6x11 by Daniel Linssen
+https://managore.itch.io/m6x11
+Free to use with attribution.
+
+m6x11.tres contains the original m6x11.ttf data with pixel font rendering settings.
+Recommended font sizes: 16, 32, 48, etc.

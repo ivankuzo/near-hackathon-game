@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://ui/fail_screen.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://ui/fonts/m6x11.tres" id="2_font"]
+[ext_resource type="AudioStream" path="res://ui/sounds/fail_impact.ogg" id="3_sound"]
+[ext_resource type="AudioStream" path="res://enemies/robots/robot_death.ogg" id="4_low_impact"]
+
+[node name="FailScreen" type="Control"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Shade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.015, 0.015, 0.02, 0.72)
+
+[node name="Fail" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -85.0
+offset_right = 240.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.95, 0.12, 0.12, 1)
+theme_override_colors/font_outline_color = Color(0.15, 0.01, 0.01, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 160
+text = "FAIL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ImpactSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sound")
+volume_db = -7.0
+pitch_scale = 0.85
+
+[node name="LowImpactSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_low_impact")
+volume_db = -7.0

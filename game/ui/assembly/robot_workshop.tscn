@@ -1,0 +1,452 @@
+[gd_scene format=3 uid="uid://bm7c5odwtcgdr"]
+
+[ext_resource type="Script" uid="uid://bm3j16x3vhnbn" path="res://ui/assembly/robot_workshop.gd" id="1_workshop"]
+[ext_resource type="PackedScene" uid="uid://ddyytrpnkps4f" path="res://world/arena/arena.tscn" id="2_arena"]
+[ext_resource type="PackedScene" path="res://player/robot_visual.tscn" id="3_robot"]
+[ext_resource type="FontFile" path="res://ui/fonts/m6x11.tres" id="4_font"]
+[ext_resource type="AudioStream" path="res://ui/sounds/metalLatch.ogg" id="5_menu_sound"]
+[ext_resource type="AudioStream" path="res://ui/sounds/metalClick.ogg" id="6_select_sound"]
+[ext_resource type="PackedScene" path="res://ui/assembly/ore_payout.tscn" id="7_payout"]
+[ext_resource type="Script" path="res://ui/assembly/garage_hint.gd" id="8_garage_hint"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="8_player"]
+[ext_resource type="AudioStream" path="res://ui/sounds/fail_impact.ogg" id="9_loss_sound"]
+[ext_resource type="Script" path="res://effects/effect_warmup.gd" id="10_warmup"]
+
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.98, 0.72, 0.36, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_option_hover"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.15, 0.21, 0.22, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_option"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.09, 0.128, 0.144, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_option_active"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.19, 0.26, 0.25, 1)
+border_width_left = 2
+border_color = Color(0.7, 0.8, 0.75, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_play_hover"]
+bg_color = Color(0.88, 0.9, 0.88, 1)
+border_width_bottom = 2
+border_color = Color(0.49, 0.53, 0.51, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_play"]
+bg_color = Color(0.73, 0.77, 0.75, 1)
+border_width_bottom = 2
+border_color = Color(0.4, 0.44, 0.42, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_play_pressed"]
+content_margin_top = 2.0
+bg_color = Color(0.56, 0.61, 0.58, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deploy_focus"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.94, 0.97, 0.94, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxFlat_slot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_module_hover"]
+bg_color = Color(0.19, 0.21, 0.21, 0.65)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.075, 0.085, 0.085, 0.96)
+
+[sub_resource type="Theme" id="Theme_workshop"]
+default_font = ExtResource("4_font")
+default_font_size = 16
+Button/colors/font_color = Color(0.84, 0.9, 0.86, 1)
+Button/colors/font_hover_color = Color(0.98, 0.98, 0.88, 1)
+Button/colors/font_pressed_color = Color(1, 0.83, 0.51, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_focus")
+Button/styles/hover = SubResource("StyleBoxFlat_option_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_option")
+Button/styles/pressed = SubResource("StyleBoxFlat_option_active")
+DeployButton/base_type = &"Button"
+DeployButton/colors/font_color = Color(0.1, 0.13, 0.12, 1)
+DeployButton/colors/font_focus_color = Color(0.1, 0.13, 0.12, 1)
+DeployButton/colors/font_hover_color = Color(0.1, 0.13, 0.12, 1)
+DeployButton/colors/font_pressed_color = Color(0.1, 0.13, 0.12, 1)
+DeployButton/styles/hover = SubResource("StyleBoxFlat_play_hover")
+DeployButton/styles/normal = SubResource("StyleBoxFlat_play")
+DeployButton/styles/pressed = SubResource("StyleBoxFlat_play_pressed")
+DeployButton/styles/focus = SubResource("StyleBoxFlat_deploy_focus")
+ModuleOption/base_type = &"Button"
+ModuleOption/styles/normal = SubResource("StyleBoxFlat_slot")
+ModuleOption/styles/hover = SubResource("StyleBoxFlat_module_hover")
+ModuleOption/styles/pressed = SubResource("StyleBoxFlat_slot")
+ModuleOption/styles/hover_pressed = SubResource("StyleBoxFlat_module_hover")
+ModuleOption/styles/disabled = SubResource("StyleBoxFlat_slot")
+ModuleOption/styles/focus = SubResource("StyleBoxFlat_module_hover")
+Label/colors/font_color = Color(0.82, 0.88, 0.85, 1)
+ModuleSlot/base_type = &"Button"
+ModuleSlot/styles/focus = SubResource("StyleBoxFlat_slot")
+ModuleSlot/styles/hover = SubResource("StyleBoxFlat_slot")
+ModuleSlot/styles/normal = SubResource("StyleBoxFlat_slot")
+ModuleSlot/styles/pressed = SubResource("StyleBoxFlat_slot")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_menu")
+
+[sub_resource type="CanvasItemMaterial" id="UIUnshaded"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="WorkshopLightFalloff"]
+offsets = PackedFloat32Array(0, 0.35, 0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.8, 1, 1, 1, 0.2, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="WorkshopLightTexture"]
+gradient = SubResource("WorkshopLightFalloff")
+width = 256
+height = 320
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Shader" id="WorkshopBeamShader"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+void fragment() {
+    float width = mix(0.025, 0.5, UV.y);
+    float edge = 1.0 - smoothstep(width * 0.55, width, abs(UV.x - 0.5));
+    float fade = smoothstep(0.0, 0.08, UV.y) * (1.0 - smoothstep(0.65, 1.0, UV.y));
+    COLOR = vec4(0.55, 0.67, 0.72, edge * fade * 0.025);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="WorkshopBeamMaterial"]
+shader = SubResource("WorkshopBeamShader")
+
+[sub_resource type="Gradient" id="WorkshopFillFalloff"]
+offsets = PackedFloat32Array(0, 0.65, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="WorkshopFillTexture"]
+gradient = SubResource("WorkshopFillFalloff")
+width = 320
+height = 320
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Shader" id="BayBackdropShader"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+void fragment() {
+    vec2 p = floor(UV * vec2(640.0, 360.0));
+    vec2 wall_uv = (p - vec2(320.0, 145.0)) / vec2(290.0, 220.0);
+    float wall_light = max(0.0, 1.0 - dot(wall_uv, wall_uv));
+    vec3 color = vec3(0.095, 0.125, 0.145) + wall_light * vec3(0.045, 0.05, 0.055);
+    float side = smoothstep(70.0, 145.0, min(p.x, 639.0 - p.x));
+    color *= mix(0.3, 1.0, side);
+    if (p.y < 254.0) {
+        // Recessed joints with restrained bevels, rather than black panel outlines.
+        if (p.x == 207.0 || p.x == 431.0 || p.y == 83.0) color *= 0.80;
+        if (p.x == 206.0 || p.x == 430.0 || p.y == 82.0) color *= 1.10;
+        if (p.x == 208.0 || p.x == 432.0 || p.y == 84.0) color *= 0.95;
+        color *= mix(0.65, 1.0, smoothstep(0.0, 45.0, p.y));
+    } else if (p.y < 262.0) {
+        // A shallow metal skirting joins the wall and floor.
+        color *= 0.74;
+        if (p.y == 254.0) color *= 1.28;
+        if (p.y == 255.0) color *= 1.08;
+        if (p.y >= 260.0) color *= 0.72;
+    } else {
+        color = vec3(0.067, 0.079, 0.085) * mix(0.5, 1.0, side);
+        vec2 floor_uv = (p - vec2(320.0, 280.0)) / vec2(170.0, 34.0);
+        float pool = max(0.0, 1.0 - dot(floor_uv, floor_uv));
+        color += pool * pool * vec3(0.05, 0.06, 0.065);
+        // Broad, faint wear on continuous concrete; no tile grid or fine noise.
+        vec2 wear_a = (p - vec2(245.0, 296.0)) / vec2(76.0, 11.0);
+        wear_a.y += wear_a.x * 0.28;
+        vec2 wear_b = (p - vec2(391.0, 320.0)) / vec2(93.0, 14.0);
+        wear_b.y -= wear_b.x * 0.21;
+        vec2 wear_c = (p - vec2(344.0, 278.0)) / vec2(48.0, 7.0);
+        float wear = (1.0 - smoothstep(0.1, 1.0, dot(wear_a, wear_a))) * 0.035;
+        wear -= (1.0 - smoothstep(0.15, 1.0, dot(wear_b, wear_b))) * 0.04;
+        wear += (1.0 - smoothstep(0.2, 1.0, dot(wear_c, wear_c))) * 0.025;
+        color *= 1.0 + wear;
+        color *= mix(0.70, 1.0, smoothstep(262.0, 273.0, p.y));
+        color *= mix(1.0, 0.6, smoothstep(280.0, 360.0, p.y));
+    }
+    float side_fade = 1.0 - smoothstep(95.0, 260.0, abs(p.x - 320.0));
+    float bottom_fade = 1.0 - smoothstep(250.0, 345.0, p.y);
+    vec2 lower_curve = vec2((p.x - 320.0) / 260.0, max(0.0, p.y - 185.0) / 160.0);
+    float rounded_fade = 1.0 - smoothstep(0.65, 1.0, length(lower_curve));
+    color *= side_fade * bottom_fade * rounded_fade;
+    COLOR = vec4(color, 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="BayBackdropMaterial"]
+shader = SubResource("BayBackdropShader")
+
+[node name="RobotWorkshop" type="Node" unique_id=1669499144]
+script = ExtResource("1_workshop")
+arena_scene = ExtResource("2_arena")
+player_scene = ExtResource("8_player")
+ore_prices = Dictionary[StringName, int]({
+&"iron": 12,
+&"copper": 25,
+&"cobalt": 45
+})
+module_prices = Dictionary[String, int]({
+"Body_A_Box": 415,
+"Body_B_Wedge": 345,
+"Body_D_Sphere": 375,
+"Head_A_Visor": 335,
+"Legs_A_Standard": 360,
+"Legs_B_Insect": 425,
+"Right_A_Gripper": 495,
+"Right_B_Welder": 115,
+"Right_C_LightRocket": 465
+})
+
+[node name="Stage" type="Node2D" parent="." unique_id=1243684729]
+
+[node name="WarmupLayer" type="CanvasLayer" parent="."]
+layer = 90
+
+[node name="Effects" type="Node2D" parent="WarmupLayer"]
+script = ExtResource("10_warmup")
+
+[node name="LoadingScreen" type="CanvasLayer" parent="."]
+visible = false
+layer = 100
+
+[node name="Background" type="ColorRect" parent="LoadingScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.025, 0.03, 0.035, 1)
+
+[node name="Label" type="Label" parent="LoadingScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -24.0
+offset_right = 160.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.85, 0.88, 0.86, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 32
+text = "LOADING..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_menu_sound")
+volume_db = -18.0
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_select_sound")
+volume_db = -18.0
+
+[node name="ModuleLossSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_loss_sound")
+volume_db = -18.0
+pitch_scale = 0.85
+
+[node name="Assembly" type="Control" parent="." unique_id=61926655]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+theme = SubResource("Theme_workshop")
+
+[node name="Background" type="ColorRect" parent="Assembly" unique_id=626634788]
+material = SubResource("BayBackdropMaterial")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.12, 0.16, 0.19, 1)
+
+[node name="Night" type="CanvasModulate" parent="Assembly"]
+color = Color(0.17, 0.2, 0.24, 1)
+
+[node name="LightBeam" type="ColorRect" parent="Assembly"]
+material = SubResource("WorkshopBeamMaterial")
+offset_left = 104.0
+offset_top = 26.0
+offset_right = 536.0
+offset_bottom = 286.0
+mouse_filter = 2
+
+[node name="OverheadLight" type="PointLight2D" parent="Assembly"]
+position = Vector2(320, 125)
+color = Color(0.83, 0.9, 0.96, 1)
+energy = 0.5
+texture = SubResource("WorkshopLightTexture")
+height = 90.0
+range_item_cull_mask = 2
+shadow_enabled = false
+
+[node name="ModuleFillLight" type="PointLight2D" parent="Assembly"]
+position = Vector2(320, 180)
+color = Color(0.96, 0.96, 0.91, 1)
+energy = 0.8
+texture = SubResource("WorkshopFillTexture")
+height = 240.0
+range_item_cull_mask = 2
+shadow_enabled = false
+
+[node name="RobotVisualShadow" parent="Assembly" instance=ExtResource("3_robot")]
+position = Vector2(257, 116)
+modulate = Color(0, 0, 0, 0.18)
+
+[node name="ArmorLight" parent="Assembly/RobotVisualShadow/CanvasOrigin/RightShoulder/Elbow" index="1"]
+enabled = false
+
+[node name="RobotVisual" parent="Assembly" unique_id=879025447 instance=ExtResource("3_robot")]
+position = Vector2(254, 112)
+
+[node name="ArmorLight" parent="Assembly/RobotVisual/CanvasOrigin/RightShoulder/Elbow" index="1"]
+enabled = false
+
+[node name="Slots" type="Control" parent="Assembly" unique_id=1161606025]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ModuleLoss" type="Label" parent="Assembly"]
+material = SubResource("UIUnshaded")
+visible = false
+offset_left = 180.0
+offset_top = 72.0
+offset_right = 460.0
+offset_bottom = 96.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.9, 0.33, 0.3, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 24
+text = "MODULES LOST"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="Assembly" unique_id=469854909]
+material = SubResource("UIUnshaded")
+layout_mode = 0
+offset_left = 492.0
+offset_top = 320.0
+offset_right = 624.0
+offset_bottom = 344.0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"DeployButton"
+theme_override_font_sizes/font_size = 20
+text = "START RUN"
+
+[node name="Stats" type="RichTextLabel" parent="Assembly"]
+material = SubResource("UIUnshaded")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 320.0
+offset_right = 884.0
+offset_bottom = 408.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_font")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Balance" type="RichTextLabel" parent="Assembly"]
+material = SubResource("UIUnshaded")
+z_index = 20
+layout_mode = 0
+offset_left = 350.0
+offset_top = 16.0
+offset_right = 898.0
+offset_bottom = 88.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_font")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+text = "[right][color=#eef1ed][font_size=32]0[/font_size][/color]  [color=#97a5a1]CREDITS[/color][/right]"
+
+[node name="ModuleMenu" type="PanelContainer" parent="Assembly" unique_id=617807893]
+material = SubResource("UIUnshaded")
+visible = false
+z_index = 5
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 0
+
+[node name="Content" type="VBoxContainer" parent="Assembly/ModuleMenu" unique_id=994968011]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Assembly/ModuleMenu/Content" unique_id=1363189104]
+use_parent_material = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.59, 0.62, 0.61, 1)
+
+[node name="Options" type="VBoxContainer" parent="Assembly/ModuleMenu/Content" unique_id=113285897]
+use_parent_material = true
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="OrePayout" parent="Assembly" instance=ExtResource("7_payout")]
+z_index = 10
+
+[node name="GarageHint" type="Control" parent="Assembly"]
+material = SubResource("UIUnshaded")
+visible = false
+z_index = 15
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_garage_hint")
+
+[node name="Label" type="Label" parent="Assembly/GarageHint"]
+use_parent_material = true
+offset_right = 180.0
+offset_bottom = 20.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/health/health_bar.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://ui/fonts/m6x11.tres" id="2_font"]
+
+[node name="HealthBar" type="Control"]
+custom_minimum_size = Vector2(201, 18)
+offset_right = 201.0
+offset_bottom = 18.0
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 9.0
+offset_top = 1.0
+offset_right = 33.0
+offset_bottom = 19.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.65, 0.68, 0.7, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+text = "HP"
+horizontal_alignment = 2
+vertical_alignment = 1

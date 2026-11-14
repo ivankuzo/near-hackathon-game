@@ -1,0 +1,157 @@
+[gd_scene format=3]
+
+[ext_resource type="TileSet" uid="uid://bdnsfk1ll2ia8" path="res://world/stone/stone_tileset.tres" id="4_tiles"]
+[ext_resource type="Script" uid="uid://bsb2qthxblmxb" path="res://world/stone/stone_tile_map.gd" id="6_stone_map"]
+[ext_resource type="Shader" uid="uid://6x16h0xskk78" path="res://world/stone/stone_lighting.gdshader" id="7_stone_lighting"]
+[ext_resource type="Script" path="res://world/stone/stone_visuals.gd" id="9_visuals"]
+
+[ext_resource type="Script" path="res://effects/particle_burst/particle_burst.gd" id="10_burst"]
+[ext_resource type="Script" path="res://effects/shader_pulse/shader_pulse.gd" id="11_pulse"]
+[ext_resource type="PackedScene" path="res://world/stone/stone_chip_burst.tscn" id="12_chips"]
+[ext_resource type="PackedScene" path="res://world/stone/stone_crack_burst.tscn" id="13_crack"]
+[ext_resource type="PackedScene" path="res://world/stone/stone_break_burst.tscn" id="14_break"]
+[ext_resource type="Script" path="res://world/stone/stone_fracture.gd" id="15_fracture"]
+[ext_resource type="Script" path="res://world/terrain/ground_contact_shadows.gd" id="16_contact"]
+
+[ext_resource type="Script" path="res://world/ore/ore_drops.gd" id="17_ore_drops"]
+[ext_resource type="AudioStream" path="res://world/stone/stone_hit.mp3" id="21_hit_sound"]
+[ext_resource type="AudioStream" path="res://world/stone/stone_stage.mp3" id="22_crack_sound"]
+[ext_resource type="AudioStream" path="res://world/stone/stone_crack.mp3" id="23_break_sound"]
+
+[sub_resource type="CanvasItemMaterial" id="Material_contact"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_contact"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="Texture_contact_edge"]
+gradient = SubResource("Gradient_contact")
+width = 16
+height = 16
+fill_from = Vector2(0, 0)
+fill_to = Vector2(1, 0)
+
+[sub_resource type="GradientTexture2D" id="Texture_contact_corner"]
+gradient = SubResource("Gradient_contact")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_stone_lighting"]
+shader = ExtResource("7_stone_lighting")
+shader_parameter/open_sides = 0
+
+[sub_resource type="Gradient" id="Gradient_rubble_shadow"]
+offsets = PackedFloat32Array(0, 0.43, 1)
+colors = PackedColorArray(0, 0, 0, 0.53, 0, 0, 0, 0.35, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rubble_shadow"]
+gradient = SubResource("Gradient_rubble_shadow")
+width = 32
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="StonePatch" type="Node2D" unique_id=1912420747 node_paths=PackedStringArray("visuals")]
+y_sort_enabled = true
+script = ExtResource("6_stone_map")
+visuals = NodePath("StoneVisuals")
+
+[node name="GroundContactShadows" type="Node2D" parent="."]
+z_index = -9
+material = SubResource("Material_contact")
+script = ExtResource("16_contact")
+shadow_width = 6.0
+shadow_strength = 0.55
+edge_texture = SubResource("Texture_contact_edge")
+corner_texture = SubResource("Texture_contact_corner")
+
+[node name="Blocks" type="TileMapLayer" parent="." unique_id=1789378945]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -1
+tile_set = ExtResource("4_tiles")
+
+[node name="ProjectileTop" type="TileMapLayer" parent="." unique_id=811025090]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+z_index = 2
+tile_set = ExtResource("4_tiles")
+physics_quadrant_size = 1
+
+[node name="ProjectileWall" type="TileMapLayer" parent="." unique_id=472818899]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+z_index = 2
+tile_set = ExtResource("4_tiles")
+physics_quadrant_size = 1
+
+[node name="StoneVisuals" type="Node2D" parent="." node_paths=PackedStringArray("crack_accent", "crack_chips", "break_chips", "fracture")]
+y_sort_enabled = true
+script = ExtResource("9_visuals")
+crack_accent = NodePath("CrackAccent")
+crack_chips = NodePath("CrackChips")
+break_chips = NodePath("BreakChips")
+fracture = NodePath("Fracture")
+
+[node name="Visuals" type="TileMapLayer" parent="StoneVisuals" unique_id=460185357]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_stone_lighting")
+tile_set = ExtResource("4_tiles")
+y_sort_origin = 26
+occlusion_enabled = false
+collision_enabled = false
+
+[node name="Foreground" type="Node2D" parent="StoneVisuals" unique_id=2110124653]
+y_sort_enabled = true
+
+[node name="CrackAccent" type="Node" parent="StoneVisuals"]
+script = ExtResource("11_pulse")
+parameter = &"crack_accent"
+
+[node name="CrackChips" type="Node2D" parent="StoneVisuals"]
+script = ExtResource("10_burst")
+burst_scene = ExtResource("13_crack")
+
+[node name="BreakChips" type="Node2D" parent="StoneVisuals"]
+script = ExtResource("10_burst")
+burst_scene = ExtResource("14_break")
+
+[node name="Fracture" type="Node2D" parent="StoneVisuals"]
+z_index = -2
+script = ExtResource("15_fracture")
+contact_shadow = SubResource("GradientTexture2D_rubble_shadow")
+
+[node name="StoneChips" type="Node2D" parent="."]
+script = ExtResource("10_burst")
+burst_scene = ExtResource("12_chips")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_hit_sound")
+volume_db = -10.0
+max_polyphony = 4
+max_distance = 850.0
+
+[node name="CrackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_crack_sound")
+volume_db = 6.0
+max_polyphony = 4
+max_distance = 850.0
+
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_break_sound")
+volume_db = -8.0
+max_polyphony = 4
+max_distance = 850.0
+
+[node name="OreDrops" type="Node2D" parent="." node_paths=PackedStringArray("stones")]
+y_sort_enabled = true
+script = ExtResource("17_ore_drops")
+stones = NodePath("..")
+
+[connection signal="stone_hit" from="." to="StoneChips" method="play"]
+[connection signal="stone_cracked" from="." to="StoneVisuals" method="on_stone_cracked"]
+[connection signal="stone_broken" from="." to="StoneVisuals" method="on_stone_broken"]
+[connection signal="finished" from="StoneVisuals/CrackAccent" to="StoneVisuals" method="on_crack_accent_finished"]

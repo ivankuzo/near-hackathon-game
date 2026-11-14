@@ -1,0 +1,387 @@
+[gd_scene format=3 uid="uid://bg0t121f26sbi"]
+
+[ext_resource type="PackedScene" path="res://enemies/robots/robot_chaser.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://deh2spneske3h" path="res://enemies/robots/walker.png" id="2_sheet"]
+[ext_resource type="Texture2D" uid="uid://cx6irmrtrhlen" path="res://enemies/robots/walker_normal.png" id="3_normals"]
+[ext_resource type="Resource" path="res://enemies/robots/walker_hurtbox.tres" id="4_hurtbox"]
+
+[ext_resource type="Shader" path="res://enemies/robots/robot_lighting.gdshader" id="5_lighting"]
+[ext_resource type="Script" path="res://enemies/robots/melee_attack.gd" id="6_melee"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_robot"]
+shader = ExtResource("5_lighting")
+shader_parameter/robot_diffuse = ExtResource("2_sheet")
+shader_parameter/robot_normal = ExtResource("3_normals")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_robot"]
+diffuse_texture = ExtResource("2_sheet")
+normal_texture = ExtResource("3_normals")
+
+[sub_resource type="AtlasTexture" id="Frame_4_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 512, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(108, 512, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(216, 512, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(324, 512, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(432, 512, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_5"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(540, 512, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_6"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(648, 512, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_4_7"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(756, 512, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_0"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(0, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(108, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(216, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(324, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(432, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_5"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(540, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_6"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(648, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_7"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(756, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_0_8"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(864, 0, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(108, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(216, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(324, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(432, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_5"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(540, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_6"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(648, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_7"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(756, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_3_8"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(864, 384, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_1"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(108, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_2"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(216, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_3"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(324, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_4"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(432, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_5"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(540, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_6"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(648, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_7"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(756, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Frame_2_8"]
+atlas = SubResource("CanvasTexture_robot")
+region = Rect2(864, 256, 108, 128)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_robot"]
+animations = [{
+"frames": [{
+"duration": 9.2,
+"texture": SubResource("Frame_4_0")
+}, {
+"duration": 7.3,
+"texture": SubResource("Frame_4_1")
+}, {
+"duration": 7.7,
+"texture": SubResource("Frame_4_2")
+}, {
+"duration": 8.8,
+"texture": SubResource("Frame_4_3")
+}, {
+"duration": 5.2,
+"texture": SubResource("Frame_4_4")
+}, {
+"duration": 8.8,
+"texture": SubResource("Frame_4_5")
+}, {
+"duration": 11.5,
+"texture": SubResource("Frame_4_6")
+}, {
+"duration": 22.0,
+"texture": SubResource("Frame_4_7")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("Frame_0_0")
+}],
+"loop": 0,
+"name": &"idle",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("Frame_3_0")
+}],
+"loop": 0,
+"name": &"idle_critical",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("Frame_2_0")
+}],
+"loop": 0,
+"name": &"idle_damaged",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 7.2,
+"texture": SubResource("Frame_0_1")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_0_2")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_0_3")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_0_4")
+}, {
+"duration": 7.2,
+"texture": SubResource("Frame_0_5")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_0_6")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_0_7")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_0_8")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 7.2,
+"texture": SubResource("Frame_3_1")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_3_2")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_3_3")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_3_4")
+}, {
+"duration": 7.2,
+"texture": SubResource("Frame_3_5")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_3_6")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_3_7")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_3_8")
+}],
+"loop": 1,
+"name": &"run_critical",
+"speed": 100.0
+}, {
+"frames": [{
+"duration": 7.2,
+"texture": SubResource("Frame_2_1")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_2_2")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_2_3")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_2_4")
+}, {
+"duration": 7.2,
+"texture": SubResource("Frame_2_5")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_2_6")
+}, {
+"duration": 6.0,
+"texture": SubResource("Frame_2_7")
+}, {
+"duration": 6.6,
+"texture": SubResource("Frame_2_8")
+}],
+"loop": 1,
+"name": &"run_damaged",
+"speed": 100.0
+}]
+
+[node name="Walker" unique_id=332665533 node_paths=PackedStringArray("melee_attack") instance=ExtResource("1_base")]
+melee_attack = NodePath("MeleeAttack")
+max_health = 340
+move_speed = 95.0
+stop_distance = 46.0
+patrol_speed = 25.0
+patrol_radius = 75.0
+sight_radius = 220.0
+disengage_radius = 400.0
+search_time = 3.4
+wake_radius = 190.0
+wake_duration = 0.7
+
+[node name="MeleeAttack" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+script = ExtResource("6_melee")
+visuals = NodePath("../Visual")
+damage = 25
+attack_range = 58.0
+interval = 1.7
+lunge_distance = 14.0
+
+[node name="Hurtbox" parent="." index="1"]
+frames = ExtResource("4_hurtbox")
+position = Vector2(0, -45)
+
+[node name="Visual" parent="." index="2"]
+run_rate = 1.02
+hit_depth = 4.5
+hit_radius = 27.0
+hit_body_bottom = -1.0
+armor_break_offset = Vector2(14, -32)
+collapse_offset = Vector2(-6, 19)
+discharge_scale = 1.25
+eye_offsets = PackedVector2Array(-8.08823, -14.6176, -8.08823, -14.6176, -8.08823, -14.6176, -8.08823, -16.6176, -8.08823, -16.6176, -8.08823, -14.6176, -8.08823, -14.6176, -8.08823, -16.6176, -8.08823, -16.6176)
+death_eye_offsets = PackedVector2Array(-8.08824, -14.6176, -7.91176, -13.6176, -9.08824, -10.3824, -12.3235, -4.79412)
+eye_energy = 0.47
+eye_radius = 44.0
+shadow_half_size = Vector2(24, 14.5)
+shadow_reach = 7.0
+
+[node name="Sprite" parent="Visual" index="1"]
+material = SubResource("ShaderMaterial_robot")
+sprite_frames = SubResource("SpriteFrames_robot")
+animation = &"idle"
+
+[node name="Eye" parent="Visual/Sprite" index="0"]
+texture = ExtResource("2_sheet")
+hframes = 9
+vframes = 6
+frame = 9
