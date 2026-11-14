@@ -4,7 +4,7 @@ Mine ore, upgrade your robot, and survive. Better modules improve your chances, 
 
 **[Play in your browser](https://ivankuzo.github.io/near-hackathon-game/)**
 
-![Gameplay](docs/images/robot-gameplay.gif)
+![Gameplay](docs/images/gameplay.gif)
 
 ## Game loop
 
