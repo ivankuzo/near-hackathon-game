@@ -34,7 +34,7 @@ stone_map = NodePath("StonePatch")
 player = NodePath("Player")
 enemy_spawner = NodePath("EnemySpawner")
 ore_drops = NodePath("StonePatch/OreDrops")
-run_duration = 300.0
+run_duration = 180.0
 
 [node name="Night" type="CanvasModulate" parent="." unique_id=1716172584]
 color = Color(0.017860003, 0.008399999, 0.06, 1)

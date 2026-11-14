@@ -24,9 +24,9 @@ const Onboarding = preload("res://ui/onboarding.gd")
 @export var enemy_spawner: EnemySpawner
 @export var ore_drops: OreDrops
 ## Run duration in seconds; zero disables the timer.
-@export_range(0.0, 600.0, 1.0, "suffix:s") var run_duration: float = 300.0
+@export_range(0.0, 600.0, 1.0, "suffix:s") var run_duration: float = 180.0
 ## Onboarding run duration in seconds.
-@export_range(1.0, 600.0, 1.0, "suffix:s") var onboarding_duration: float = 180.0
+@export_range(1.0, 600.0, 1.0, "suffix:s") var onboarding_duration: float = 90.0
 ## Minimum enemy spawn distance during onboarding.
 @export_range(0.0, 2000.0, 1.0, "suffix:px") var onboarding_safe_radius: float = 500.0
 ## Chance that an ore drop wakes the nearest sleeping enemy on screen.
