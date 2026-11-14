@@ -334,6 +334,15 @@ enabled = false
 [node name="RobotVisual" parent="Assembly" unique_id=879025447 instance=ExtResource("3_robot")]
 position = Vector2(254, 112)
 
+[node name="LeftTool" parent="Assembly/RobotVisual/CanvasOrigin" index="3"]
+self_modulate = Color(1.12, 1.12, 1.12, 1)
+
+[node name="UpperArm" parent="Assembly/RobotVisual/CanvasOrigin/RightShoulder" index="0"]
+self_modulate = Color(0.86, 0.86, 0.86, 1)
+
+[node name="Forearm" parent="Assembly/RobotVisual/CanvasOrigin/RightShoulder/Elbow" index="0"]
+self_modulate = Color(0.86, 0.86, 0.86, 1)
+
 [node name="ArmorLight" parent="Assembly/RobotVisual/CanvasOrigin/RightShoulder/Elbow" index="1"]
 enabled = false
 
